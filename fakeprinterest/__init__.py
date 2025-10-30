@@ -3,14 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+import os  # 👈 importa o os pra ler variáveis de ambiente
 
-# 🔹 Cria a aplicação Flask
 app = Flask(__name__)
 
 # 🔹 Configurações básicas
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meubanco.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")  # 👈 pega a URL do Render
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SECRET_KEY"] = "9b2f9610da06841602fa28036d1b9448"
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")  # 👈 pega a chave do Render
 app.config["UPLOAD_FOLDER"] = "static/fotos_posts"
 
 # 🔹 Inicializa extensões
@@ -25,5 +25,10 @@ def load_user(user_id):
     from fakeprinterest.models import Usuario
     return Usuario.query.get(int(user_id))
 
-# 🔹 Importa rotas no final (para evitar import circular)
+# 🔹 Importa rotas
 from fakeprinterest import routes
+
+# 🔹 Cria tabelas no banco (só se não existirem)
+with app.app_context():
+    from fakeprinterest import models
+    database.create_all()
