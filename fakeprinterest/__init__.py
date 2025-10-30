@@ -4,6 +4,7 @@ from datetime import datetime
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 
+# 🔹 Cria a aplicação Flask
 app = Flask(__name__)
 
 # 🔹 Configurações básicas
@@ -12,19 +13,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = "9b2f9610da06841602fa28036d1b9448"
 app.config["UPLOAD_FOLDER"] = "static/fotos_posts"
 
-# 🔹 Extensões
+# 🔹 Inicializa extensões
 database = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "homepage"
 
-
-# 🔹 Carregamento do usuário logado
+# 🔹 Carrega o usuário logado
 @login_manager.user_loader
 def load_user(user_id):
-    from fakeprinterest.models import Usuario  # garante importação correta
+    from fakeprinterest.models import Usuario
     return Usuario.query.get(int(user_id))
 
-
-# 🔹 Importa as outras rotas (login, feed, etc.)
+# 🔹 Importa rotas no final (para evitar import circular)
 from fakeprinterest import routes
