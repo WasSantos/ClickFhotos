@@ -1,18 +1,21 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
-import os  # 👈 importa o os pra ler variáveis de ambiente
+import os
 
+# 🔹 Cria a aplicação Flask
 app = Flask(__name__)
 
 # 🔹 Configurações básicas
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")  # 👈 pega a URL do Render
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg://")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL").replace("postgresql://", "postgresql+psycopg://")
-  # 👈 pega a chave do Render
 app.config["UPLOAD_FOLDER"] = "static/fotos_posts"
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "uma_chave_padrao_para_testes")  # CSRF funciona
 
 # 🔹 Inicializa extensões
 database = SQLAlchemy(app)
@@ -29,7 +32,7 @@ def load_user(user_id):
 # 🔹 Importa rotas
 from fakeprinterest import routes
 
-# 🔹 Cria tabelas no banco (só se não existirem)
+# 🔹 Cria tabelas automaticamente (somente se não existirem)
 with app.app_context():
     from fakeprinterest import models
     database.create_all()
