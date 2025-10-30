@@ -10,7 +10,8 @@ app = Flask(__name__)
 # 🔹 Configurações básicas
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")  # 👈 pega a URL do Render
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")  # 👈 pega a chave do Render
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL").replace("postgresql://", "postgresql+psycopg://")
+  # 👈 pega a chave do Render
 app.config["UPLOAD_FOLDER"] = "static/fotos_posts"
 
 # 🔹 Inicializa extensões
