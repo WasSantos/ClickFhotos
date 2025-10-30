@@ -1,0 +1,43 @@
+{% extends "homepage.html" %}
+
+{% block titulo %}
+Feed
+{% endblock %}
+
+{% block body %}
+{% include "navebar.html" %}
+
+<div class="container">
+
+    <h2>Feed de Fotos</h2>
+
+    <!-- BARRA DE PESQUISA -->
+    <div class="barra-pesquisa">
+        <form method="GET" action="{{ url_for('feed') }}">
+            <input type="text" name="q" placeholder="Pesquisar por usuário..." value="{{ request.args.get('q', '') }}">
+            <button type="submit">🔍</button>
+        </form>
+    </div>
+
+    <div class="conteudo">
+        {% for foto in fotos %}
+            <div class="bloco-imagem">
+                <a href="{{ url_for('perfil', id_usuario=foto.id_usuario) }}">
+                    <img src="{{ url_for('static', filename='fotos_posts/' + foto.imagem) }}" alt="{{ foto.descricao }}">
+                </a>
+
+                {% if current_user.is_authenticated and current_user.id == foto.id_usuario %}
+                    <form method="POST" action="{{ url_for('deletar_foto', foto_id=foto.id) }}">
+                        <button type="submit" class="botao-deletar">
+                            Deletar
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        {% else %}
+            <p>Nenhuma foto ainda 😢</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

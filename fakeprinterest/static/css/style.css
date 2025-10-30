@@ -1,0 +1,477 @@
+/* =======================
+   IMPORTAÇÃO DE FONTES
+======================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* =======================
+   RESET / ESTILOS GLOBAIS
+======================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+/* =======================
+   NAVBAR
+======================= */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Logo */
+nav .logo-pinterest,
+.logo-clickphoto {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+nav .logo-pinterest img,
+.logo-clickphoto img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+nav .logo-clickphoto h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  color: #e60023;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Links principais (Feed, Perfil, Sobre) */
+nav .nav-links a,
+.restante-nav a {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #333;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color 0.3s, transform 0.2s;
+}
+
+nav .nav-links a:hover,
+.restante-nav a:hover {
+  color: #e60023;
+  transform: scale(1.05);
+}
+
+/* =======================
+   USER BAR
+======================= */
+.user-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.user-bar .user-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #c00;
+}
+
+.user-bar .username {
+  font-weight: 700;
+  font-size: 18px;
+  color: #c00;
+  margin-right: 12px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.user-bar .user-buttons .btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  background-color: #c00;
+  transition: all 0.3s ease;
+}
+
+.user-bar .user-buttons .btn:hover {
+  background-color: #a00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.user-bar .user-buttons .btn-logout {
+  background-color: #555;
+}
+
+.user-bar .user-buttons .btn-logout:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* =======================
+   CONTAINER PRINCIPAL
+======================= */
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding: 15px;
+}
+
+/* =======================
+   FORMULÁRIOS E INPUTS
+======================= */
+.bloco-add-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.botao-arquivo {
+  padding: 5px 10px;
+  border-radius: 15px;
+  border: 0;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.bloco-arquivo {
+  background-color: #eee;
+  padding: 10px 20px;
+  border-radius: 55px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.input-arquivo {
+  display: none;
+}
+
+#imagem-arquivo {
+  display: none;
+}
+
+#imagem-arquivo.visivel {
+  display: inline-block;
+}
+
+.bloco-add-img .botao-login {
+  width: auto;
+}
+
+.bloco-input-botao {
+  display: flex;
+  column-gap: 20px;
+}
+
+.feed a, .perfil a {
+  text-decoration: none;
+}
+
+.input {
+  width: 100%;
+  font-size: 15px;
+  padding: 10px;
+  border: 2px solid #cdcdcd;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: #e60023;
+  outline: none;
+}
+
+.botao-login {
+  border-radius: 25px;
+  padding: 12px 18px;
+  width: 100%;
+  border: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #e60023;
+  color: #fff;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.botao-login:hover {
+  background-color: #d50c22;
+  transform: scale(1.03);
+}
+
+/* =======================
+   GALERIA / FEED
+======================= */
+.conteudo {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  max-width: 100%;
+  column-gap: 10px;
+  row-gap: 30px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+  .conteudo {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .conteudo {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .conteudo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .conteudo {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bloco-imagem img {
+  border-radius: 20px;
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+}
+
+/* =======================
+   POPUP CRIAR CONTA
+======================= */
+.container-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+}
+
+.popup {
+  width: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 5px;
+  padding: 20px;
+  border-radius: 24px;
+  background-color: #fff;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =======================
+   BOTÕES ADICIONAIS
+======================= */
+.botao-perfil a {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.botao-perfil a:hover {
+  background-color: #777;
+  text-decoration: none;
+}
+
+.link-criarconta {
+  color: #333;
+  text-decoration: none;
+}
+
+.link-criarconta:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+.logo-formulario {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.logo-formulario img {
+  width: 70px;
+  height: auto;
+}
+
+/* =======================
+   BOTÃO DELETAR FOTO
+======================= */
+.botao-deletar {
+  margin-top: 5px;
+  padding: 8px 16px;
+  border-radius: 25px;
+  background-color: #c00;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.botao-deletar:hover {
+  background-color: #a00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* =======================
+   BARRA DE PESQUISA NO FEED
+======================= */
+.barra-pesquisa {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.barra-pesquisa form {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+}
+
+.barra-pesquisa input[type="text"] {
+  flex: 1;
+  padding: 10px 15px;
+  border: 2px solid #cdcdcd;
+  border-radius: 25px 0 0 25px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.barra-pesquisa input[type="text"]:focus {
+  border-color: #e60023;
+}
+
+.barra-pesquisa button {
+  padding: 10px 15px;
+  border: 2px solid #cdcdcd;
+  border-left: 0;
+  border-radius: 0 25px 25px 0;
+  background-color: #e60023;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer
+}
+
+/* =======================
+   HAMBURGUER / MOBILE MENU
+======================= */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: 200;
+}
+
+.hamburger div {
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Estado ativo: hamburguer vira X */
+.hamburger.active div:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active div:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile menu escondido por padrão */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: #fff;
+  position: absolute;
+  top: 70px;
+  right: 32px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 100;
+}
+
+.mobile-menu a {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.mobile-menu a:hover {
+  color: #e60023;
+  transform: scale(1.05);
+}
+
+/* Mostrar hambúrguer e esconder links desktop em telas pequenas */
+@media (max-width: 768px) {
+  nav .nav-links,
+  .restante-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+

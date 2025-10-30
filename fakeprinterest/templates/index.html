@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FakePinterest - Boas-vindas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <div class="popup">
+    <!-- LOGO -->
+    <div class="logo-formulario">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo FakePinterest">
+    </div>
+
+    <h2>Bem-vindo ao FakePinterest</h2>
+    <p class="texto-bemvindo">Compartilhe suas fotos, inspire e descubra novas ideias todos os dias 🌎</p>
+
+    <div class="botoes-inicio">
+      <a href="{{ url_for('homepage') }}" class="botao-login">Entrar</a>
+      <a href="{{ url_for('criarconta') }}" class="botao-criar">Criar Conta</a>
+    </div>
+  </div>
+
+</body>
+</html>
