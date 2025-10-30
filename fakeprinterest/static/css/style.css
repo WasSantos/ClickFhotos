@@ -475,3 +475,11 @@ nav .nav-links a:hover,
   }
 }
 
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #eee;
+    color: #555;
+    margin-top: 40px;
+    font-size: 14px;
+}
